@@ -1,6 +1,6 @@
 import React from 'react';
-import TodoItem from './TodoItem';
-import { Todo } from './TodoItem'
+import TodoItem, { Todo } from './TodoItem';
+import NewTodoForm from './NewTodoForm'
 
 type TodoListProps = {
   todos: Todo[]
@@ -9,6 +9,7 @@ type TodoListProps = {
 const TodoList = ({ todos }: TodoListProps ) => {
   return (
     <>
+      <NewTodoForm />
       {todos.map((todo) => <TodoItem key={todo.text} todo={todo} />)}
     </>
   )
