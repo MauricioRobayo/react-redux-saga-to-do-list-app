@@ -1,54 +1,79 @@
+import { Todo } from './store'
+
 export const CREATE_TODO = "CREATE_TODO";
 export const REMOVE_TODO = "REMOVE_TODO";
-export const MARK_COMPLETED = "MARK_COMPLETED";
-export const LOAD_TODOS_IN_PROGRESS = 'LOAD_TODOS_IN_PROGRESS';
-export const LOAD_TODOS_SUCCESS = 'LOAD_TODOS_SUCCESS';
-export const LOAD_TODOS_FAILURE = 'LOAD_TODOS_FAILURE';
+export const TOGGLE_COMPLETED_STATUS = "TOGGLE_COMPLETED_STATUS";
+export const LOAD_TODOS_IN_PROGRESS = "LOAD_TODOS_IN_PROGRESS";
+export const LOAD_TODOS_SUCCESS = "LOAD_TODOS_SUCCESS";
+export const LOAD_TODOS_FAILURE = "LOAD_TODOS_FAILURE";
 
-export type Todo = {
-  id: string
-  text: string
-  isCompleted: boolean
-  createdAt: string
-}
-
-export type TodoAction = {
-  type: typeof CREATE_TODO | typeof REMOVE_TODO | typeof MARK_COMPLETED;
+export interface CreateTodoAction {
+  type: typeof CREATE_TODO;
   payload: {
     text: string;
   };
-};
-
-export type IsLoadingActon = {
-  type: typeof LOAD_TODOS_FAILURE | typeof LOAD_TODOS_IN_PROGRESS | typeof LOAD_TODOS_SUCCESS
+}
+export interface RemoveTodoAction {
+  type: typeof REMOVE_TODO;
+  payload: {
+    text: string;
+  };
+}
+export interface ToggleCompletedStatusAction {
+  type: typeof TOGGLE_COMPLETED_STATUS;
+  payload: {
+    text: string;
+  };
+}
+export interface LoadTodosInProgressAction {
+  type: typeof LOAD_TODOS_IN_PROGRESS;
+}
+export interface LoadTodosSuccessAction {
+  type: typeof LOAD_TODOS_SUCCESS;
+  payload: {
+    todos: Todo[];
+  };
+}
+export interface LoadTodosFailureAction {
+  type: typeof LOAD_TODOS_FAILURE;
 }
 
-export const createTodo = (text: string): TodoAction => ({
+export type TodosActionTypes = 
+ | CreateTodoAction
+ | RemoveTodoAction
+ | ToggleCompletedStatusAction
+ | LoadTodosInProgressAction
+ | LoadTodosSuccessAction
+ | LoadTodosFailureAction;
+
+export const createTodo = (text: string): TodosActionTypes => ({
   type: CREATE_TODO,
   payload: { text },
 });
 
-export const removeTodo = (text: string): TodoAction => ({
+export const removeTodo = (text: string): TodosActionTypes => ({
   type: REMOVE_TODO,
   payload: { text },
 });
 
-export const toggleCompleteStatus = (text: string): TodoAction => ({
-  type: MARK_COMPLETED,
+export const toggleCompleteStatus = (
+  text: string
+): ToggleCompletedStatusAction => ({
+  type: TOGGLE_COMPLETED_STATUS,
   payload: { text },
 });
 
-export const loadTodosInProgress = (): IsLoadingActon => {
-  return ({
-    type: LOAD_TODOS_IN_PROGRESS
-  });
-}
+export const loadTodosInProgress = (): TodosActionTypes => {
+  return {
+    type: LOAD_TODOS_IN_PROGRESS,
+  };
+};
 
-export const loadTodosSuccess = (todos: Todo[]) => ({
+export const loadTodosSuccess = (todos: Todo[]): TodosActionTypes => ({
   type: LOAD_TODOS_SUCCESS,
-  payload: { todos }
-})
+  payload: { todos },
+});
 
-export const loadTodosFailure = (): IsLoadingActon => ({
-  type: LOAD_TODOS_FAILURE
-})
+export const loadTodosFailure = (): TodosActionTypes => ({
+  type: LOAD_TODOS_FAILURE,
+});

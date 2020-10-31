@@ -5,10 +5,18 @@ import storage from 'redux-persist/lib/storage'
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk';
-import { todos, isLoading, TodoState } from "./reducers";
+import { todos, isLoading } from "./reducers";
+
+
+export type Todo = {
+  id: string;
+  text: string;
+  isCompleted: boolean;
+  createdAt: string;
+};
 
 export type AppState = {
-  todos: TodoState
+  todos: Todo[]
   isLoading: boolean
 }
 
