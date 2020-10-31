@@ -5,7 +5,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 import { todos, TodoState } from "./reducers";
 import { createLogger } from 'redux-logger'
 
-type AppState = {
+export type AppState = {
   todos: TodoState
 }
 
