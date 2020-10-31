@@ -6,14 +6,15 @@ export type Todo = {
 
 type TodoProps = {
   todo: Todo
+  removeTodo: (text: string) => void
 }
 
-const TodoItem = ({ todo }: TodoProps ) => {
+const TodoItem = ({ todo, removeTodo }: TodoProps ) => {
   return (
     <div>
       <h2>{todo.text}</h2>
-      <button>Remove</button>
-      <button>Toggle status</button>
+      <button type='button' onClick={() => removeTodo(todo.text)}>Remove</button>
+      <button type='button'>Toggle status</button>
     </div>
   )
 }
