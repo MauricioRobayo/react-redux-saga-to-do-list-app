@@ -1,10 +1,10 @@
 import { CREATE_TODO, REMOVE_TODO, TodoAction } from "./actions";
 
-type Todo = {
+export type Todo = {
   text: string;
 };
 
-type TodoState = Todo[];
+export type TodoState = Todo[];
 
 const initialState: TodoState = [];
 
