@@ -1,18 +1,25 @@
-import React from 'react';
-import TodoItem, { Todo } from './TodoItem';
-import NewTodoForm from './NewTodoForm'
+import React from "react";
+import { connect } from "react-redux";
+import TodoItem, { Todo } from "./TodoItem";
+import NewTodoForm from "./NewTodoForm";
 
 type TodoListProps = {
-  todos: Todo[]
-}
+  todos: Todo[];
+};
 
-const TodoList = ({ todos }: TodoListProps ) => {
+const TodoList = ({ todos }: TodoListProps) => {
   return (
     <>
       <NewTodoForm />
-      {todos.map((todo) => <TodoItem key={todo.text} todo={todo} />)}
+      {todos.map((todo) => (
+        <TodoItem key={todo.text} todo={todo} />
+      ))}
     </>
-  )
-}
+  );
+};
 
-export default TodoList;
+const mapStateToProps = ({ todos }: {todos: Todo[]}) => ({
+  todos
+})
+
+export default connect(mapStateToProps)(TodoList);
