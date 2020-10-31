@@ -1,5 +1,5 @@
 import React from "react";
-import { Todo } from "../reducers";
+import { Todo } from "../store";
 
 type TodoProps = {
   todo: Todo;

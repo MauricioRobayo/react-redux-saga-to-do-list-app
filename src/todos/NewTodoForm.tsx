@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Todo } from "../reducers";
+import { Todo } from "../store";
 import { createTodo } from "../actions";
 
 type NewTodoFromProps = {

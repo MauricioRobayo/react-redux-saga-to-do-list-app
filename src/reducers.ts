@@ -26,10 +26,10 @@ export const isLoading = (state = false, action: TodosActionTypes) => {
   }
 }
 
-export const todos = (state = initialState, action: TodosActionTypes) => {
+export const todos = (state = initialState, action: TodosActionTypes): TodoState => {
   switch (action.type) {
     case CREATE_TODO: 
-      return [...state, { text: action.payload.text, isCompleted: false }];
+      return [...state, { text: action.payload.text, isCompleted: false, createdAt: '', id: '' }];
     case REMOVE_TODO: 
       return state.filter((todo) => todo.text !== action.payload.text);
     case TOGGLE_COMPLETED_STATUS:

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { loadTodos } from '../thunks'
 import TodoItem from "./TodoItem";
-import { Todo } from '../reducers'
+import { Todo } from '../store'
 import NewTodoForm from "./NewTodoForm";
 import { removeTodo, toggleCompleteStatus } from "../actions";
 import { AppState } from '../store'

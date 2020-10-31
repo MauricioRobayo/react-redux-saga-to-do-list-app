@@ -7,34 +7,34 @@ export const LOAD_TODOS_IN_PROGRESS = "LOAD_TODOS_IN_PROGRESS";
 export const LOAD_TODOS_SUCCESS = "LOAD_TODOS_SUCCESS";
 export const LOAD_TODOS_FAILURE = "LOAD_TODOS_FAILURE";
 
-export interface CreateTodoAction {
+interface CreateTodoAction {
   type: typeof CREATE_TODO;
   payload: {
     text: string;
   };
 }
-export interface RemoveTodoAction {
+interface RemoveTodoAction {
   type: typeof REMOVE_TODO;
   payload: {
     text: string;
   };
 }
-export interface ToggleCompletedStatusAction {
+interface ToggleCompletedStatusAction {
   type: typeof TOGGLE_COMPLETED_STATUS;
   payload: {
     text: string;
   };
 }
-export interface LoadTodosInProgressAction {
+interface LoadTodosInProgressAction {
   type: typeof LOAD_TODOS_IN_PROGRESS;
 }
-export interface LoadTodosSuccessAction {
+interface LoadTodosSuccessAction {
   type: typeof LOAD_TODOS_SUCCESS;
   payload: {
     todos: Todo[];
   };
 }
-export interface LoadTodosFailureAction {
+interface LoadTodosFailureAction {
   type: typeof LOAD_TODOS_FAILURE;
 }
 
