@@ -35,17 +35,23 @@ export const isLoading = (state = false, action: IsLoadingActon) => {
 export const todos = (state = initialState, action: TodoAction) => {
   const { type, payload } = action;
   switch (type) {
-    case CREATE_TODO:
-      return [...state, { text: payload.text, isCompleted: false }];
-    case REMOVE_TODO:
-      return state.filter((todo) => todo.text !== payload.text);
-    case MARK_COMPLETED:
+    case CREATE_TODO: {
+      const { text } = payload
+      return [...state, { text, isCompleted: false }];
+    }
+    case REMOVE_TODO: {
+      const { text } = payload
+      return state.filter((todo) => todo.text !== text);
+    }
+    case MARK_COMPLETED: {
+      const { text } = payload
       return state.map((todo) => {
-        if (todo.text === payload.text) {
+        if (todo.text === text) {
           return { ...todo, isCompleted: !todo.isCompleted };
         }
         return todo;
       });
+    }
     default:
       return state;
   }
