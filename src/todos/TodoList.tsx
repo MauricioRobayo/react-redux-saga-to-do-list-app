@@ -1,17 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
-import { Todo } from '../reducers'
+import { AppState } from '../store'
 import NewTodoForm from "./NewTodoForm";
 import { removeTodo, toggleCompleteStatus } from "../actions";
 
-type TodoListProps = {
-  todos: Todo[];
-  removeTodo: (text: string) => void;
-  toggleCompleteStatus: (text: string) => void;
-};
-
-const TodoList = ({ todos, removeTodo, toggleCompleteStatus }: TodoListProps) => {
+const TodoList = () => {
+  const todos = useSelector(({ todos }: AppState) => todos)
+  const dispatch = useDispatch();
   return (
     <>
       <NewTodoForm />
@@ -19,21 +15,12 @@ const TodoList = ({ todos, removeTodo, toggleCompleteStatus }: TodoListProps) =>
         <TodoItem
           key={todo.text}
           todo={todo}
-          removeTodo={removeTodo}
-          toggleCompleteStatus={toggleCompleteStatus}
+          removeTodo={(text) => dispatch(removeTodo(text))}
+          toggleCompleteStatus={(text) => dispatch(toggleCompleteStatus(text))}
         />
       ))}
     </>
   );
 };
 
-const mapStateToProps = ({ todos }: { todos: Todo[] }) => ({
-  todos,
-});
-
-const mapDispatchToProps = {
-  removeTodo,
-  toggleCompleteStatus,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default TodoList;
