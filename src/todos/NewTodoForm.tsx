@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Todo } from "../store";
+import { AppState, Todo } from "../store";
 import { addTodoRequest } from "../thunks";
+import { getTodos } from '../selectors'
 
 type NewTodoFromProps = {
   todos: Todo[];
@@ -36,8 +37,8 @@ const NewTodoForm = ({ todos, addTodoRequest }: NewTodoFromProps) => {
   );
 };
 
-const mapStateToProps = (state: { todos: Todo[] }) => ({
-  todos: state.todos,
+const mapStateToProps = (state: AppState) => ({
+  todos: getTodos(state),
 });
 
 const mapDispatchToProps = {

@@ -5,6 +5,7 @@ import TodoItem from "./TodoItem";
 import { Todo } from '../store'
 import NewTodoForm from "./NewTodoForm";
 import { AppState } from '../store'
+import { getTodos, getTodosLoading } from '../selectors'
 
 type TodoListProps = {
   todos: Todo[];
@@ -36,9 +37,9 @@ const TodoList = ({ todos, isLoading, removeTodoRequest, markCompletedTodoReques
   return isLoading ? loader : content;
 };
 
-const mapStateToProps = ({ todos, isLoading }: AppState) => ({
-  todos,
-  isLoading,
+const mapStateToProps = (state: AppState) => ({
+  todos: getTodos(state),
+  isLoading: getTodosLoading(state)
 });
 
 const mapDispatchToProps = {
