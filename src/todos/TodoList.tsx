@@ -1,21 +1,20 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { loadTodos, removeTodoRequest } from '../thunks'
+import { loadTodos, removeTodoRequest, markCompletedTodoRequest } from '../thunks'
 import TodoItem from "./TodoItem";
 import { Todo } from '../store'
 import NewTodoForm from "./NewTodoForm";
-import { markCompletedTodo } from "../actions";
 import { AppState } from '../store'
 
 type TodoListProps = {
   todos: Todo[];
   isLoading: boolean;
   removeTodoRequest: (id: string) => void;
-  markCompletedTodo: (text: string) => void;
+  markCompletedTodoRequest: (id: string) => void;
   loadTodos: () => void;
 };
 
-const TodoList = ({ todos, isLoading, removeTodoRequest, markCompletedTodo, loadTodos }: TodoListProps) => {
+const TodoList = ({ todos, isLoading, removeTodoRequest, markCompletedTodoRequest, loadTodos }: TodoListProps) => {
   useEffect(() => {
     loadTodos()
   }, [loadTodos])
@@ -28,7 +27,7 @@ const TodoList = ({ todos, isLoading, removeTodoRequest, markCompletedTodo, load
           key={todo.text}
           todo={todo}
           removeTodo={removeTodoRequest}
-          markCompletedTodo={markCompletedTodo}
+          markCompletedTodo={markCompletedTodoRequest}
         />
       ))}
     </>
@@ -44,7 +43,7 @@ const mapStateToProps = ({ todos, isLoading }: AppState) => ({
 
 const mapDispatchToProps = {
   removeTodoRequest,
-  markCompletedTodo,
+  markCompletedTodoRequest,
   loadTodos
 };
 
