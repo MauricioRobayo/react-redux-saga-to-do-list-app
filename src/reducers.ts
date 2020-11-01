@@ -31,7 +31,7 @@ export const todos = (state = initialState, action: TodosActionTypes): TodoState
     case CREATE_TODO: 
       return [...state, action.payload.todo];
     case REMOVE_TODO: 
-      return state.filter((todo) => todo.text !== action.payload.text);
+      return state.filter((todo) => todo.id !== action.payload.id);
     case TOGGLE_COMPLETED_STATUS:
       return state.map((todo) => {
         if (todo.text === action.payload.text) {

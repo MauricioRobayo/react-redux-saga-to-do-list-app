@@ -1,21 +1,21 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { loadTodos } from '../thunks'
+import { loadTodos, removeTodoRequest } from '../thunks'
 import TodoItem from "./TodoItem";
 import { Todo } from '../store'
 import NewTodoForm from "./NewTodoForm";
-import { removeTodo, toggleCompleteStatus } from "../actions";
+import { toggleCompleteStatus } from "../actions";
 import { AppState } from '../store'
 
 type TodoListProps = {
   todos: Todo[];
   isLoading: boolean;
-  removeTodo: (text: string) => void;
+  removeTodoRequest: (id: string) => void;
   toggleCompleteStatus: (text: string) => void;
   loadTodos: () => void;
 };
 
-const TodoList = ({ todos, isLoading, removeTodo, toggleCompleteStatus, loadTodos }: TodoListProps) => {
+const TodoList = ({ todos, isLoading, removeTodoRequest, toggleCompleteStatus, loadTodos }: TodoListProps) => {
   useEffect(() => {
     loadTodos()
   }, [loadTodos])
@@ -27,7 +27,7 @@ const TodoList = ({ todos, isLoading, removeTodo, toggleCompleteStatus, loadTodo
         <TodoItem
           key={todo.text}
           todo={todo}
-          removeTodo={removeTodo}
+          removeTodo={removeTodoRequest}
           toggleCompleteStatus={toggleCompleteStatus}
         />
       ))}
@@ -43,7 +43,7 @@ const mapStateToProps = ({ todos, isLoading }: AppState) => ({
 });
 
 const mapDispatchToProps = {
-  removeTodo,
+  removeTodoRequest,
   toggleCompleteStatus,
   loadTodos
 };

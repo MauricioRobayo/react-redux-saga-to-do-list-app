@@ -16,7 +16,7 @@ interface CreateTodoAction {
 interface RemoveTodoAction {
   type: typeof REMOVE_TODO;
   payload: {
-    text: string;
+    id: string;
   };
 }
 interface ToggleCompletedStatusAction {
@@ -51,9 +51,9 @@ export const createTodo = (todo: Todo): TodosActionTypes => ({
   payload: { todo },
 });
 
-export const removeTodo = (text: string): TodosActionTypes => ({
+export const removeTodo = (id: string): TodosActionTypes => ({
   type: REMOVE_TODO,
-  payload: { text },
+  payload: { id },
 });
 
 export const toggleCompleteStatus = (

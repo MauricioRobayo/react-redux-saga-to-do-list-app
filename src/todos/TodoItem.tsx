@@ -3,7 +3,7 @@ import { Todo } from "../store";
 
 type TodoProps = {
   todo: Todo;
-  removeTodo: (text: string) => void;
+  removeTodo: (id: string) => void;
   toggleCompleteStatus: (text: string) => void;
 };
 
@@ -11,11 +11,11 @@ const TodoItem = ({ todo, removeTodo, toggleCompleteStatus }: TodoProps) => {
   return (
     <div>
       <h2>{todo.text}</h2>
-      <button type="button" onClick={() => removeTodo(todo.text)}>
+      <button type="button" onClick={() => removeTodo(todo.id)}>
         Remove
       </button>
       <button type="button" onClick={() => {
-        return toggleCompleteStatus(todo.text);
+        return toggleCompleteStatus(todo.id);
       }}>
         {todo.isCompleted ? 'Incomplete' : 'Mark completed'}
       </button>
