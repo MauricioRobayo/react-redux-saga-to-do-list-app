@@ -43,3 +43,16 @@ export const removeTodoRequest = (id: string): ThunkAction<void, AppState, unkno
     console.log(e)
   }
 }
+
+// export const markCompletedTodo = (id: string): ThunkAction<void, AppState, unknown, Action<string>> => async (dispatch) => {
+//   try {
+//     const response = await fetch(`http://localhost:8080/todos/${id}/completed`, {
+//       method: 'post'
+//     })
+//     const completedTodo: Todo = await response.json();
+//     dispatch()
+
+//   } catch (e) {
+//     console.log(e)
+//   }
+// }

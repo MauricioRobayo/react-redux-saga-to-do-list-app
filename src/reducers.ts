@@ -1,7 +1,7 @@
 import {
   CREATE_TODO,
   REMOVE_TODO,
-  TOGGLE_COMPLETED_STATUS,
+  MARK_COMPLETED_STATUS,
   LOAD_TODOS_FAILURE,
   LOAD_TODOS_IN_PROGRESS,
   LOAD_TODOS_SUCCESS,
@@ -32,10 +32,10 @@ export const todos = (state = initialState, action: TodosActionTypes): TodoState
       return [...state, action.payload.todo];
     case REMOVE_TODO: 
       return state.filter((todo) => todo.id !== action.payload.id);
-    case TOGGLE_COMPLETED_STATUS:
+    case MARK_COMPLETED_STATUS:
       return state.map((todo) => {
-        if (todo.text === action.payload.text) {
-          return { ...todo, isCompleted: !todo.isCompleted };
+        if (todo.id === action.payload.id) {
+          return { ...todo, isCompleted: true };
         }
         return todo;
       });

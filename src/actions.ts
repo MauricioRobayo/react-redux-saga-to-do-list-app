@@ -2,7 +2,7 @@ import { Todo } from './store'
 
 export const CREATE_TODO = "CREATE_TODO";
 export const REMOVE_TODO = "REMOVE_TODO";
-export const TOGGLE_COMPLETED_STATUS = "TOGGLE_COMPLETED_STATUS";
+export const MARK_COMPLETED_STATUS = "MARK_COMPLETED_STATUS";
 export const LOAD_TODOS_IN_PROGRESS = "LOAD_TODOS_IN_PROGRESS";
 export const LOAD_TODOS_SUCCESS = "LOAD_TODOS_SUCCESS";
 export const LOAD_TODOS_FAILURE = "LOAD_TODOS_FAILURE";
@@ -19,10 +19,10 @@ interface RemoveTodoAction {
     id: string;
   };
 }
-interface ToggleCompletedStatusAction {
-  type: typeof TOGGLE_COMPLETED_STATUS;
+interface MarkCompletedTodoAction {
+  type: typeof MARK_COMPLETED_STATUS;
   payload: {
-    text: string;
+    id: string;
   };
 }
 interface LoadTodosInProgressAction {
@@ -41,7 +41,7 @@ interface LoadTodosFailureAction {
 export type TodosActionTypes = 
  | CreateTodoAction
  | RemoveTodoAction
- | ToggleCompletedStatusAction
+ | MarkCompletedTodoAction
  | LoadTodosInProgressAction
  | LoadTodosSuccessAction
  | LoadTodosFailureAction;
@@ -56,11 +56,11 @@ export const removeTodo = (id: string): TodosActionTypes => ({
   payload: { id },
 });
 
-export const toggleCompleteStatus = (
-  text: string
-): ToggleCompletedStatusAction => ({
-  type: TOGGLE_COMPLETED_STATUS,
-  payload: { text },
+export const markCompletedTodo = (
+  id: string
+): MarkCompletedTodoAction => ({
+  type: MARK_COMPLETED_STATUS,
+  payload: { id },
 });
 
 export const loadTodosInProgress = (): TodosActionTypes => {

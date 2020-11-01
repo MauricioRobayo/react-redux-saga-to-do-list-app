@@ -4,18 +4,18 @@ import { loadTodos, removeTodoRequest } from '../thunks'
 import TodoItem from "./TodoItem";
 import { Todo } from '../store'
 import NewTodoForm from "./NewTodoForm";
-import { toggleCompleteStatus } from "../actions";
+import { markCompletedTodo } from "../actions";
 import { AppState } from '../store'
 
 type TodoListProps = {
   todos: Todo[];
   isLoading: boolean;
   removeTodoRequest: (id: string) => void;
-  toggleCompleteStatus: (text: string) => void;
+  markCompletedTodo: (text: string) => void;
   loadTodos: () => void;
 };
 
-const TodoList = ({ todos, isLoading, removeTodoRequest, toggleCompleteStatus, loadTodos }: TodoListProps) => {
+const TodoList = ({ todos, isLoading, removeTodoRequest, markCompletedTodo, loadTodos }: TodoListProps) => {
   useEffect(() => {
     loadTodos()
   }, [loadTodos])
@@ -28,7 +28,7 @@ const TodoList = ({ todos, isLoading, removeTodoRequest, toggleCompleteStatus, l
           key={todo.text}
           todo={todo}
           removeTodo={removeTodoRequest}
-          toggleCompleteStatus={toggleCompleteStatus}
+          markCompletedTodo={markCompletedTodo}
         />
       ))}
     </>
@@ -44,7 +44,7 @@ const mapStateToProps = ({ todos, isLoading }: AppState) => ({
 
 const mapDispatchToProps = {
   removeTodoRequest,
-  toggleCompleteStatus,
+  markCompletedTodo,
   loadTodos
 };
 

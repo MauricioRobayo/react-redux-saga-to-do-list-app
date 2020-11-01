@@ -4,21 +4,21 @@ import { Todo } from "../store";
 type TodoProps = {
   todo: Todo;
   removeTodo: (id: string) => void;
-  toggleCompleteStatus: (text: string) => void;
+  markCompletedTodo: (text: string) => void;
 };
 
-const TodoItem = ({ todo, removeTodo, toggleCompleteStatus }: TodoProps) => {
+const TodoItem = ({ todo, removeTodo, markCompletedTodo }: TodoProps) => {
   return (
     <div>
       <h2>{todo.text}</h2>
       <button type="button" onClick={() => removeTodo(todo.id)}>
         Remove
       </button>
-      <button type="button" onClick={() => {
-        return toggleCompleteStatus(todo.id);
-      }}>
-        {todo.isCompleted ? 'Incomplete' : 'Mark completed'}
-      </button>
+      {todo.isCompleted ? null : (
+        <button type="button" onClick={() => markCompletedTodo(todo.id)}>
+          Mark completed
+        </button>
+      )}
     </div>
   );
 };
