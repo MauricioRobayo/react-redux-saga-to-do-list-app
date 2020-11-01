@@ -1,5 +1,5 @@
 {
-  "name": "building-modern-projects-with-react",
+  "name": "react-redux-saga-todo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
