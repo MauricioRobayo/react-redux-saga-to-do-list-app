@@ -1,23 +1,23 @@
 import React, { useState } from "react";
-import { connect, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../store";
 import { addTodoRequest } from "../thunks";
 import { getTodos } from '../selectors'
 
-type NewTodoFromProps = {
-  addTodoRequest: (text: string) => void;
-};
-
-const NewTodoForm = ({ addTodoRequest }: NewTodoFromProps) => {
+const NewTodoForm = () => {
   const todos = useSelector<AppState, AppState['todos']['data']>(getTodos)
   const [inputValue, setInputValue] = useState("");
+  
+  const dispatch = useDispatch();
+
   const isDuplicateTodo = (text: string) =>
     todos.some((todo) => todo.text === text);
   const isEmptyTodo = (text: string) => 
     text.trim().length === 0
-  const onCreateTodoHandler = () => {
+  
+    const onCreateTodoHandler = () => {
     if (!isEmptyTodo(inputValue) && !isDuplicateTodo(inputValue)) {
-      addTodoRequest(inputValue);
+      dispatch(addTodoRequest(inputValue));
       setInputValue("");
     }
   };
@@ -39,8 +39,4 @@ const NewTodoForm = ({ addTodoRequest }: NewTodoFromProps) => {
   );
 };
 
-const mapDispatchToProps = {
-  addTodoRequest,
-};
-
-export default connect(null, mapDispatchToProps)(NewTodoForm);
+export default NewTodoForm;

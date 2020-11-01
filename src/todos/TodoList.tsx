@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   loadTodos,
   removeTodoRequest,
@@ -14,24 +14,16 @@ import {
   getTodosLoading,
 } from "../selectors";
 
-type TodoListProps = {
-  removeTodoRequest: (id: string) => void;
-  markCompletedTodoRequest: (id: string) => void;
-  loadTodos: () => void;
-};
-
-const TodoList = ({
-  removeTodoRequest,
-  markCompletedTodoRequest,
-  loadTodos,
-}: TodoListProps) => {
+const TodoList = () => {
   const completeTodos = useSelector<AppState, AppState['todos']['data']>(getCompleteTodos);
   const incompleteTodos = useSelector<AppState, AppState['todos']['data']>(getIncompleteTodos);
   const isLoading = useSelector<AppState, AppState['todos']['isLoading']>(getTodosLoading);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    loadTodos();
-  }, [loadTodos]);
+    dispatch(loadTodos());
+  }, [dispatch]);
   const loader = <div>Loading todos...</div>;
   const content = (
     <>
@@ -41,8 +33,8 @@ const TodoList = ({
         <TodoItem
         key={todo.text}
         todo={todo}
-        removeTodo={removeTodoRequest}
-        markCompletedTodo={markCompletedTodoRequest}
+        removeTodo={(id:string) => dispatch(removeTodoRequest(id))}
+        markCompletedTodo={(id:string) => dispatch(markCompletedTodoRequest(id))}
         />
         ))}
       <h2>Complete TODOS</h2>
@@ -50,7 +42,7 @@ const TodoList = ({
         <TodoItem
           key={todo.text}
           todo={todo}
-          removeTodo={removeTodoRequest}
+          removeTodo={(id:string) => dispatch(removeTodoRequest(id))}
         />
       ))}
     </>
@@ -59,10 +51,4 @@ const TodoList = ({
   return isLoading ? loader : content;
 };
 
-const mapDispatchToProps = {
-  removeTodoRequest,
-  markCompletedTodoRequest,
-  loadTodos,
-};
-
-export default connect(null, mapDispatchToProps)(TodoList);
+export default TodoList;
