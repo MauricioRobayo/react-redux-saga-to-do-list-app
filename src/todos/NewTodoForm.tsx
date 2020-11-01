@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Todo } from "../store";
-import { createTodo } from "../actions";
+import { addTodoRequest } from "../thunks";
 
 type NewTodoFromProps = {
   todos: Todo[];
-  createTodo: (text: string) => void;
+  addTodoRequest: (text: string) => void;
 };
 
-const NewTodoForm = ({ todos, createTodo }: NewTodoFromProps) => {
+const NewTodoForm = ({ todos, addTodoRequest }: NewTodoFromProps) => {
   const [inputValue, setInputValue] = useState("");
   const isDuplicateTodo = (text: string) =>
     todos.some((todo) => todo.text === text);
   const onCreateTodoHandler = () => {
     if (!isDuplicateTodo(inputValue)) {
-      createTodo(inputValue);
+      addTodoRequest(inputValue);
       setInputValue("");
     }
   };
@@ -41,7 +41,7 @@ const mapStateToProps = (state: { todos: Todo[] }) => ({
 });
 
 const mapDispatchToProps = {
-  createTodo,
+  addTodoRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewTodoForm);

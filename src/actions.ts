@@ -10,7 +10,7 @@ export const LOAD_TODOS_FAILURE = "LOAD_TODOS_FAILURE";
 interface CreateTodoAction {
   type: typeof CREATE_TODO;
   payload: {
-    text: string;
+    todo: Todo
   };
 }
 interface RemoveTodoAction {
@@ -46,9 +46,9 @@ export type TodosActionTypes =
  | LoadTodosSuccessAction
  | LoadTodosFailureAction;
 
-export const createTodo = (text: string): TodosActionTypes => ({
+export const createTodo = (todo: Todo): TodosActionTypes => ({
   type: CREATE_TODO,
-  payload: { text },
+  payload: { todo },
 });
 
 export const removeTodo = (text: string): TodosActionTypes => ({
