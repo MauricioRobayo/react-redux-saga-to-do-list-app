@@ -7,42 +7,53 @@ import {
   LOAD_TODOS_SUCCESS,
   TodosActionTypes,
 } from "./actions";
-import { Todo } from './store'
+import { AppState } from './store'
 
-export type TodoState = Todo[];
+type TodosState = AppState['todos']
 
-const initialState: TodoState = [];
-
-export const isLoading = (state = false, action: TodosActionTypes) => {
-  const { type } = action
-  switch(type) {
-    case LOAD_TODOS_IN_PROGRESS:
-      return true
-    case LOAD_TODOS_FAILURE:
-    case LOAD_TODOS_SUCCESS:
-      return false
-    default:
-      return state
-  }
+const initialState: TodosState = {
+  data: [],
+  isLoading: false,
 }
 
-export const todos = (state = initialState, action: TodosActionTypes): TodoState => {
+export const todos = (state = initialState, action: TodosActionTypes): TodosState => {
   switch (action.type) {
     case CREATE_TODO: 
-      return [...state, action.payload.todo];
+      return {
+        ...state,
+        data: [...state.data, action.payload.todo]
+      };
     case REMOVE_TODO: 
-      return state.filter((todo) => todo.id !== action.payload.id);
+      return {
+        ...state,
+        data: state.data.filter((todo) => todo.id !== action.payload.id)
+      };
     case MARK_COMPLETED_STATUS:
-      return state.map((todo) => {
-        if (todo.id === action.payload.id) {
-          return { ...todo, isCompleted: true };
-        }
-        return todo;
-      });
+      return {
+        ...state,
+        data: state.data.map((todo) => {
+          if (todo.id === action.payload.id) {
+            return { ...todo, isCompleted: true };
+          }
+          return todo;
+        })
+      };
     case LOAD_TODOS_SUCCESS: 
-      return action.payload.todos
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload.todos
+      }
     case LOAD_TODOS_IN_PROGRESS:
+      return {
+        ...state,
+        isLoading: true
+      }
     case LOAD_TODOS_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      }
     default:
       return state;
   }

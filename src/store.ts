@@ -5,7 +5,7 @@ import storage from 'redux-persist/lib/storage'
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk';
-import { todos, isLoading } from "./reducers";
+import { todos } from "./reducers";
 
 
 export type Todo = {
@@ -16,15 +16,17 @@ export type Todo = {
 };
 
 export type AppState = {
-  todos: Todo[]
-  isLoading: boolean
+  todos: {
+    data: Todo[]
+    isLoading: boolean
+  }
 }
 
 const logger = createLogger({
   collapsed: true
 })
 
-const reducers = { todos, isLoading };
+const reducers = { todos };
 
 const persistConfig = {
   key: 'root',
