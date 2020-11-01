@@ -15,9 +15,15 @@ import {
 } from "../selectors";
 
 const TodoList = () => {
-  const completeTodos = useSelector<AppState, AppState['todos']['data']>(getCompleteTodos);
-  const incompleteTodos = useSelector<AppState, AppState['todos']['data']>(getIncompleteTodos);
-  const isLoading = useSelector<AppState, AppState['todos']['isLoading']>(getTodosLoading);
+  const completeTodos = useSelector<AppState, AppState["todos"]["data"]>(
+    getCompleteTodos
+  );
+  const incompleteTodos = useSelector<AppState, AppState["todos"]["data"]>(
+    getIncompleteTodos
+  );
+  const isLoading = useSelector<AppState, AppState["todos"]["isLoading"]>(
+    getTodosLoading
+  );
 
   const dispatch = useDispatch();
 
@@ -25,13 +31,13 @@ const TodoList = () => {
     dispatch(loadTodos());
   }, [dispatch]);
 
-  const onRemoveTodoHandler = (id:string) => {
-    dispatch(removeTodoRequest(id))
-  }
+  const onRemoveTodoHandler = (id: string) => {
+    dispatch(removeTodoRequest(id));
+  };
 
   const onMarkCompletedTodoHandler = (id: string) => {
-    dispatch(markCompletedTodoRequest(id))
-  }
+    dispatch(markCompletedTodoRequest(id));
+  };
 
   const loader = <div>Loading todos...</div>;
   const content = (
@@ -39,12 +45,12 @@ const TodoList = () => {
       <NewTodoForm />
       {incompleteTodos.map((todo) => (
         <TodoItem
-        key={todo.text}
-        todo={todo}
-        removeTodo={onRemoveTodoHandler}
-        markCompletedTodo={onMarkCompletedTodoHandler}
+          key={todo.text}
+          todo={todo}
+          removeTodo={onRemoveTodoHandler}
+          markCompletedTodo={onMarkCompletedTodoHandler}
         />
-        ))}
+      ))}
       <h2>Complete TODOS</h2>
       {completeTodos.map((todo) => (
         <TodoItem
