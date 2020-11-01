@@ -1,5 +1,5 @@
 import { Todo } from "./store";
-import { put, call, all, takeEvery } from "redux-saga/effects";
+import { put, call, all, takeEvery, takeLatest } from "redux-saga/effects";
 import {
   LOAD_TODOS,
   CREATE_TODO,
@@ -73,11 +73,11 @@ function* markCompletedTodoRequest({
 }
 
 function* watchLoadTodos() {
-  yield takeEvery(LOAD_TODOS, fetchTodos);
+  yield takeLatest(LOAD_TODOS, fetchTodos);
 }
 
 function* watchCreateTodo() {
-  yield takeEvery(CREATE_TODO, addTodoRequest);
+  yield takeLatest(CREATE_TODO, addTodoRequest);
 }
 
 function* watchRemoveTodo() {
