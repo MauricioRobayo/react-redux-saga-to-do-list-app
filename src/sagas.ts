@@ -25,10 +25,7 @@ function* fetchTodos() {
   }
 }
 
-function* addTodoRequest(action: CreateTodoAction) {
-  const {
-    payload: { text },
-  } = action;
+function* addTodoRequest({ payload: { text } }: CreateTodoAction) {
   try {
     const body = JSON.stringify({ text });
     const response = yield call(fetch, "http://localhost:8080/todos", {
@@ -45,10 +42,7 @@ function* addTodoRequest(action: CreateTodoAction) {
   }
 }
 
-function* removeTodoRequest(action: RemoveTodoAction) {
-  const {
-    payload: { id },
-  } = action;
+function* removeTodoRequest({ payload: { id } }: RemoveTodoAction) {
   try {
     const response = yield call(fetch, `http://localhost:8080/todos/${id}`, {
       method: "delete",
@@ -60,10 +54,9 @@ function* removeTodoRequest(action: RemoveTodoAction) {
   }
 }
 
-function* markCompletedTodoRequest(action: MarkCompletedTodoAction) {
-  const {
-    payload: { id },
-  } = action;
+function* markCompletedTodoRequest({
+  payload: { id },
+}: MarkCompletedTodoAction) {
   try {
     const response = yield call(
       fetch,

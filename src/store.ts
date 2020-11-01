@@ -4,7 +4,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
-import thunk from "redux-thunk";
 import { todos } from "./reducers";
 import rootSaga from "./sagas";
 
@@ -37,7 +36,7 @@ const persistedReducer = persistReducer<AppState>(persistConfig, rootReducer);
 
 const store = createStore(
   persistedReducer,
-  composeWithDevTools(applyMiddleware(sagaMiddleware, thunk))
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 
 sagaMiddleware.run(rootSaga)
