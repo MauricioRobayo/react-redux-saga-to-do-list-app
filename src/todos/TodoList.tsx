@@ -24,17 +24,25 @@ const TodoList = () => {
   useEffect(() => {
     dispatch(loadTodos());
   }, [dispatch]);
+
+  const onRemoveTodoHandler = (id:string) => {
+    dispatch(removeTodoRequest(id))
+  }
+
+  const onMarkCompletedTodoHandler = (id: string) => {
+    dispatch(markCompletedTodoRequest(id))
+  }
+
   const loader = <div>Loading todos...</div>;
   const content = (
     <>
       <NewTodoForm />
-      <h2>Incomplete TODOS</h2>
       {incompleteTodos.map((todo) => (
         <TodoItem
         key={todo.text}
         todo={todo}
-        removeTodo={(id:string) => dispatch(removeTodoRequest(id))}
-        markCompletedTodo={(id:string) => dispatch(markCompletedTodoRequest(id))}
+        removeTodo={onRemoveTodoHandler}
+        markCompletedTodo={onMarkCompletedTodoHandler}
         />
         ))}
       <h2>Complete TODOS</h2>
@@ -42,7 +50,7 @@ const TodoList = () => {
         <TodoItem
           key={todo.text}
           todo={todo}
-          removeTodo={(id:string) => dispatch(removeTodoRequest(id))}
+          removeTodo={onRemoveTodoHandler}
         />
       ))}
     </>
