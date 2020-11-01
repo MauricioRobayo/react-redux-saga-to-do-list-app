@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../store";
-import { addTodoRequest } from "../thunks";
+import { createTodo } from "../actions";
 import { getTodos } from '../selectors'
 
 const NewTodoForm = () => {
@@ -17,7 +17,7 @@ const NewTodoForm = () => {
   
     const onCreateTodoHandler = () => {
     if (!isEmptyTodo(inputValue) && !isDuplicateTodo(inputValue)) {
-      dispatch(addTodoRequest(inputValue));
+      dispatch(createTodo(inputValue));
       setInputValue("");
     }
   };

@@ -2,29 +2,9 @@ import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { AppState, Todo } from "./store";
 import {
-  createTodo,
   removeTodo,
   markCompletedTodo,
 } from "./actions";
-
-export const addTodoRequest = (
-  text: string
-): ThunkAction<void, AppState, unknown, Action<string>> => async (dispatch) => {
-  try {
-    const body = JSON.stringify({ text });
-    const response = await fetch("http://localhost:8080/todos", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "post",
-      body,
-    });
-    const todo: Todo = await response.json();
-    dispatch(createTodo(todo));
-  } catch (e) {
-    console.log(e);
-  }
-};
 
 export const removeTodoRequest = (
   id: string

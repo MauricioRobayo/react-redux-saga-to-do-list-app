@@ -1,5 +1,5 @@
 import {
-  CREATE_TODO,
+  SYNC_TODO,
   REMOVE_TODO,
   MARK_COMPLETED_STATUS,
   LOAD_TODOS,
@@ -18,7 +18,7 @@ const initialState: TodosState = {
 
 export const todos = (state = initialState, action: TodosActionTypes): TodosState => {
   switch (action.type) {
-    case CREATE_TODO: 
+    case SYNC_TODO: 
       return {
         ...state,
         data: [...state.data, action.payload.todo]
