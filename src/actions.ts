@@ -3,6 +3,7 @@ import { Todo } from './store'
 export const CREATE_TODO = "CREATE_TODO";
 export const REMOVE_TODO = "REMOVE_TODO";
 export const MARK_COMPLETED_STATUS = "MARK_COMPLETED_STATUS";
+export const LOAD_TODOS = "LOAD_TODOS";
 export const LOAD_TODOS_IN_PROGRESS = "LOAD_TODOS_IN_PROGRESS";
 export const LOAD_TODOS_SUCCESS = "LOAD_TODOS_SUCCESS";
 export const LOAD_TODOS_FAILURE = "LOAD_TODOS_FAILURE";
@@ -25,8 +26,8 @@ interface MarkCompletedTodoAction {
     id: string;
   };
 }
-interface LoadTodosInProgressAction {
-  type: typeof LOAD_TODOS_IN_PROGRESS;
+interface LoadTodosAction {
+  type: typeof LOAD_TODOS,
 }
 interface LoadTodosSuccessAction {
   type: typeof LOAD_TODOS_SUCCESS;
@@ -42,7 +43,7 @@ export type TodosActionTypes =
  | CreateTodoAction
  | RemoveTodoAction
  | MarkCompletedTodoAction
- | LoadTodosInProgressAction
+ | LoadTodosAction
  | LoadTodosSuccessAction
  | LoadTodosFailureAction;
 
@@ -58,16 +59,14 @@ export const removeTodo = (id: string): TodosActionTypes => ({
 
 export const markCompletedTodo = (
   id: string
-): MarkCompletedTodoAction => ({
+): TodosActionTypes => ({
   type: MARK_COMPLETED_STATUS,
   payload: { id },
 });
 
-export const loadTodosInProgress = (): TodosActionTypes => {
-  return {
-    type: LOAD_TODOS_IN_PROGRESS,
-  };
-};
+export const loadTodos = (): TodosActionTypes => ({
+  type: LOAD_TODOS
+})
 
 export const loadTodosSuccess = (todos: Todo[]): TodosActionTypes => ({
   type: LOAD_TODOS_SUCCESS,

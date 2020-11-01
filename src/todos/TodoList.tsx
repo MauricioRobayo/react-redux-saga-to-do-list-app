@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  loadTodos,
   removeTodoRequest,
   markCompletedTodoRequest,
 } from "../thunks";
+import { loadTodos } from '../actions'
 import TodoItem from "./TodoItem";
 import { AppState } from "../store";
 import NewTodoForm from "./NewTodoForm";

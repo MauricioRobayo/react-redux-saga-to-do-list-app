@@ -6,7 +6,7 @@ import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import thunk from "redux-thunk";
 import { todos } from "./reducers";
-import { helloSagas } from "./sagas";
+import rootSaga from "./sagas";
 
 export type Todo = {
   id: string;
@@ -40,6 +40,6 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(sagaMiddleware, thunk))
 );
 
-sagaMiddleware.run(helloSagas);
+sagaMiddleware.run(rootSaga)
 
 export default store;
