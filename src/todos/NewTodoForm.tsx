@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { AppState, Todo } from "../store";
+import { connect, useSelector } from "react-redux";
+import { AppState } from "../store";
 import { addTodoRequest } from "../thunks";
 import { getTodos } from '../selectors'
 
 type NewTodoFromProps = {
-  todos: Todo[];
   addTodoRequest: (text: string) => void;
 };
 
-const NewTodoForm = ({ todos, addTodoRequest }: NewTodoFromProps) => {
+const NewTodoForm = ({ addTodoRequest }: NewTodoFromProps) => {
+  const todos = useSelector<AppState, AppState['todos']['data']>(getTodos)
   const [inputValue, setInputValue] = useState("");
   const isDuplicateTodo = (text: string) =>
     todos.some((todo) => todo.text === text);
@@ -37,12 +37,8 @@ const NewTodoForm = ({ todos, addTodoRequest }: NewTodoFromProps) => {
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  todos: getTodos(state),
-});
-
 const mapDispatchToProps = {
   addTodoRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewTodoForm);
+export default connect(null, mapDispatchToProps)(NewTodoForm);

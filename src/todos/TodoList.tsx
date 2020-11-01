@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import {
   loadTodos,
   removeTodoRequest,
   markCompletedTodoRequest,
 } from "../thunks";
 import TodoItem from "./TodoItem";
-import { Todo } from "../store";
-import NewTodoForm from "./NewTodoForm";
 import { AppState } from "../store";
+import NewTodoForm from "./NewTodoForm";
 import {
   getCompleteTodos,
   getIncompleteTodos,
@@ -16,22 +15,20 @@ import {
 } from "../selectors";
 
 type TodoListProps = {
-  completeTodos: Todo[];
-  incompleteTodos: Todo[];
-  isLoading: boolean;
   removeTodoRequest: (id: string) => void;
   markCompletedTodoRequest: (id: string) => void;
   loadTodos: () => void;
 };
 
 const TodoList = ({
-  incompleteTodos,
-  completeTodos,
-  isLoading,
   removeTodoRequest,
   markCompletedTodoRequest,
   loadTodos,
 }: TodoListProps) => {
+  const completeTodos = useSelector<AppState, AppState['todos']['data']>(getCompleteTodos);
+  const incompleteTodos = useSelector<AppState, AppState['todos']['data']>(getIncompleteTodos);
+  const isLoading = useSelector<AppState, AppState['todos']['isLoading']>(getTodosLoading);
+
   useEffect(() => {
     loadTodos();
   }, [loadTodos]);
@@ -62,16 +59,10 @@ const TodoList = ({
   return isLoading ? loader : content;
 };
 
-const mapStateToProps = (state: AppState) => ({
-  completeTodos: getCompleteTodos(state),
-  incompleteTodos: getIncompleteTodos(state),
-  isLoading: getTodosLoading(state),
-});
-
 const mapDispatchToProps = {
   removeTodoRequest,
   markCompletedTodoRequest,
   loadTodos,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default connect(null, mapDispatchToProps)(TodoList);
