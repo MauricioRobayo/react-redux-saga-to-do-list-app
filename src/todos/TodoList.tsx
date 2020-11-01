@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  removeTodoRequest,
-  markCompletedTodoRequest,
-} from "../thunks";
-import { loadTodos } from '../actions'
+import { loadTodos, removeTodo, markCompletedTodo } from '../actions'
 import TodoItem from "./TodoItem";
 import { AppState } from "../store";
 import NewTodoForm from "./NewTodoForm";
@@ -32,11 +28,11 @@ const TodoList = () => {
   }, [dispatch]);
 
   const onRemoveTodoHandler = (id: string) => {
-    dispatch(removeTodoRequest(id));
+    dispatch(removeTodo(id));
   };
 
   const onMarkCompletedTodoHandler = (id: string) => {
-    dispatch(markCompletedTodoRequest(id));
+    dispatch(markCompletedTodo(id));
   };
 
   const loader = <div>Loading todos...</div>;

@@ -9,28 +9,28 @@ export const LOAD_TODOS_IN_PROGRESS = "LOAD_TODOS_IN_PROGRESS";
 export const LOAD_TODOS_SUCCESS = "LOAD_TODOS_SUCCESS";
 export const LOAD_TODOS_FAILURE = "LOAD_TODOS_FAILURE";
 
-interface SyncTodoAction {
-  type: typeof SYNC_TODO;
-  payload: {
-    todo: Todo
-  };
-}
 export interface CreateTodoAction {
   type: typeof CREATE_TODO;
   payload: {
     text: string
   };
 }
-interface RemoveTodoAction {
+export interface RemoveTodoAction {
   type: typeof REMOVE_TODO;
   payload: {
     id: string;
   };
 }
-interface MarkCompletedTodoAction {
+export interface MarkCompletedTodoAction {
   type: typeof MARK_COMPLETED_STATUS;
   payload: {
     id: string;
+  };
+}
+interface SyncTodoAction {
+  type: typeof SYNC_TODO;
+  payload: {
+    todo: Todo
   };
 }
 interface LoadTodosAction {
