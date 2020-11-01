@@ -1,12 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
-import { createLogger } from 'redux-logger'
-import thunk from 'redux-thunk';
+import createSagaMiddleWare from "redux-saga";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
+import thunk from "redux-thunk";
 import { todos } from "./reducers";
-
+import { helloSagas } from "./sagas";
 
 export type Todo = {
   id: string;
@@ -17,24 +17,29 @@ export type Todo = {
 
 export type AppState = {
   todos: {
-    data: Todo[]
-    isLoading: boolean
-  }
-}
-
-const logger = createLogger({
-  collapsed: true
-})
+    data: Todo[];
+    isLoading: boolean;
+  };
+};
 
 const reducers = { todos };
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
-  stateReconciler: autoMergeLevel2
-}
+  stateReconciler: autoMergeLevel2,
+};
+
+const sagaMiddleware = createSagaMiddleWare();
 
 const rootReducer = combineReducers<AppState>(reducers);
-const persistedReducer = persistReducer<AppState>(persistConfig, rootReducer)
+const persistedReducer = persistReducer<AppState>(persistConfig, rootReducer);
 
-export const configureStore = () => createStore(persistedReducer, composeWithDevTools(applyMiddleware(logger, thunk)));
+const store = createStore(
+  persistedReducer,
+  composeWithDevTools(applyMiddleware(sagaMiddleware, thunk))
+);
+
+sagaMiddleware.run(helloSagas);
+
+export default store;

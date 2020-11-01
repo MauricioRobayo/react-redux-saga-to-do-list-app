@@ -6,9 +6,8 @@ import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
-import { configureStore } from './store';
+import store from './store';
 
-const store = configureStore()
 const persistor = persistStore(store)
 
 ReactDOM.render(
