@@ -13,8 +13,10 @@ const NewTodoForm = ({ addTodoRequest }: NewTodoFromProps) => {
   const [inputValue, setInputValue] = useState("");
   const isDuplicateTodo = (text: string) =>
     todos.some((todo) => todo.text === text);
+  const isEmptyTodo = (text: string) => 
+    text.trim().length === 0
   const onCreateTodoHandler = () => {
-    if (!isDuplicateTodo(inputValue)) {
+    if (!isEmptyTodo(inputValue) && !isDuplicateTodo(inputValue)) {
       addTodoRequest(inputValue);
       setInputValue("");
     }
