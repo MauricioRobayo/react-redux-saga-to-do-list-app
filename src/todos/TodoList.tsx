@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import styled from 'styled-components/macro';
 
 import { loadTodos, removeTodo, markCompletedTodo } from "../actions";
 import TodoItem from "./TodoItem";
@@ -10,6 +11,14 @@ import {
   getIncompleteTodos,
   getTodosLoading,
 } from "../selectors";
+
+const TodoListWrapper = styled.div`
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 2rem 1rem;
+  background-color: white;
+  border-radius: 4px;
+`;
 
 const TodoList = () => {
   const completeTodos = useSelector<AppState, AppState["todos"]["data"]>(
@@ -38,7 +47,7 @@ const TodoList = () => {
 
   const loader = <div>Loading todos...</div>;
   const content = (
-    <>
+    <TodoListWrapper>
       <NewTodoForm />
       <h2>TODOS</h2>
       {incompleteTodos.map((todo) => (
@@ -58,7 +67,7 @@ const TodoList = () => {
           markCompletedTodo={onMarkCompletedTodoHandler}
         />
       ))}
-    </>
+    </TodoListWrapper>
   );
 
   return isLoading ? loader : content;
