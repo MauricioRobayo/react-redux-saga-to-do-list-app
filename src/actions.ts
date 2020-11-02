@@ -1,4 +1,4 @@
-import { Todo } from './store'
+import { Todo } from "./store";
 
 export const SYNC_TODO = "SYNC_TODO";
 export const CREATE_TODO = "CREATE_TODO";
@@ -12,7 +12,7 @@ export const LOAD_TODOS_FAILURE = "LOAD_TODOS_FAILURE";
 export interface CreateTodoAction {
   type: typeof CREATE_TODO;
   payload: {
-    text: string
+    text: string;
   };
 }
 export interface RemoveTodoAction {
@@ -30,11 +30,11 @@ export interface MarkCompletedTodoAction {
 interface SyncTodoAction {
   type: typeof SYNC_TODO;
   payload: {
-    todo: Todo
+    todo: Todo;
   };
 }
 interface LoadTodosAction {
-  type: typeof LOAD_TODOS,
+  type: typeof LOAD_TODOS;
 }
 interface LoadTodosSuccessAction {
   type: typeof LOAD_TODOS_SUCCESS;
@@ -46,14 +46,14 @@ interface LoadTodosFailureAction {
   type: typeof LOAD_TODOS_FAILURE;
 }
 
-export type TodosActionTypes = 
- | SyncTodoAction
- | CreateTodoAction
- | RemoveTodoAction
- | MarkCompletedTodoAction
- | LoadTodosAction
- | LoadTodosSuccessAction
- | LoadTodosFailureAction;
+export type TodosActionTypes =
+  | SyncTodoAction
+  | CreateTodoAction
+  | RemoveTodoAction
+  | MarkCompletedTodoAction
+  | LoadTodosAction
+  | LoadTodosSuccessAction
+  | LoadTodosFailureAction;
 
 export const syncTodo = (todo: Todo): TodosActionTypes => ({
   type: SYNC_TODO,
@@ -61,10 +61,10 @@ export const syncTodo = (todo: Todo): TodosActionTypes => ({
 });
 
 export const createTodo = (text: string): TodosActionTypes => {
-  return ({
+  return {
     type: CREATE_TODO,
     payload: { text },
-  });
+  };
 };
 
 export const removeTodo = (id: string): TodosActionTypes => ({
@@ -72,16 +72,14 @@ export const removeTodo = (id: string): TodosActionTypes => ({
   payload: { id },
 });
 
-export const markCompletedTodo = (
-  id: string
-): TodosActionTypes => ({
+export const markCompletedTodo = (id: string): TodosActionTypes => ({
   type: MARK_COMPLETED_STATUS,
   payload: { id },
 });
 
 export const loadTodos = (): TodosActionTypes => ({
-  type: LOAD_TODOS
-})
+  type: LOAD_TODOS,
+});
 
 export const loadTodosSuccess = (todos: Todo[]): TodosActionTypes => ({
   type: LOAD_TODOS_SUCCESS,

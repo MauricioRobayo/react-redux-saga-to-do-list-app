@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadTodos, removeTodo, markCompletedTodo } from '../actions'
+import { loadTodos, removeTodo, markCompletedTodo } from "../actions";
 import TodoItem from "./TodoItem";
 import { AppState } from "../store";
 import NewTodoForm from "./NewTodoForm";
@@ -46,8 +46,8 @@ const TodoList = () => {
           todo={todo}
           removeTodo={onRemoveTodoHandler}
           markCompletedTodo={onMarkCompletedTodoHandler}
-          />
-          ))}
+        />
+      ))}
       <h2>Completed TODOS</h2>
       {completeTodos.map((todo) => (
         <TodoItem

@@ -1,9 +1,9 @@
-import axios from 'axios'
-import { Todo } from './store'
+import axios from "axios";
+import { Todo } from "./store";
 
 class TodosApi {
-  private API_URL = 'http://localhost:8080/todos'
- 
+  private API_URL = "http://localhost:8080/todos";
+
   async fetchTodos(): Promise<Todo[]> {
     const response = await axios.get<Todo[]>(this.API_URL);
     return response.data;
@@ -20,7 +20,7 @@ class TodosApi {
   }
 
   async markCompletedTodo(id: string): Promise<Todo> {
-    const response = await axios.post<Todo>(`${this.API_URL}/${id}/completed`)
+    const response = await axios.post<Todo>(`${this.API_URL}/${id}/completed`);
     return response.data;
   }
 }

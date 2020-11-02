@@ -7,26 +7,29 @@ import {
   LOAD_TODOS_SUCCESS,
   TodosActionTypes,
 } from "./actions";
-import { AppState } from './store'
+import { AppState } from "./store";
 
-type TodosState = AppState['todos']
+type TodosState = AppState["todos"];
 
 const initialState: TodosState = {
   data: [],
   isLoading: false,
-}
+};
 
-export const todos = (state = initialState, action: TodosActionTypes): TodosState => {
+export const todos = (
+  state = initialState,
+  action: TodosActionTypes
+): TodosState => {
   switch (action.type) {
-    case SYNC_TODO: 
+    case SYNC_TODO:
       return {
         ...state,
-        data: [...state.data, action.payload.todo]
+        data: [...state.data, action.payload.todo],
       };
-    case REMOVE_TODO: 
+    case REMOVE_TODO:
       return {
         ...state,
-        data: state.data.filter((todo) => todo.id !== action.payload.id)
+        data: state.data.filter((todo) => todo.id !== action.payload.id),
       };
     case MARK_COMPLETED_STATUS:
       return {
@@ -36,24 +39,24 @@ export const todos = (state = initialState, action: TodosActionTypes): TodosStat
             return { ...todo, isCompleted: true };
           }
           return todo;
-        })
+        }),
       };
     case LOAD_TODOS:
       return {
         ...state,
         isLoading: true,
-      }
-    case LOAD_TODOS_SUCCESS: 
+      };
+    case LOAD_TODOS_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        data: action.payload.todos
-      }
+        data: action.payload.todos,
+      };
     case LOAD_TODOS_FAILURE:
       return {
         ...state,
-        isLoading: false
-      }
+        isLoading: false,
+      };
     default:
       return state;
   }

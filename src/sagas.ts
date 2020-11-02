@@ -18,7 +18,7 @@ import todosApi from "./todosApi";
 
 function* fetchTodos() {
   try {
-    const todos: Todo[] = yield call([todosApi, 'fetchTodos']);
+    const todos: Todo[] = yield call([todosApi, "fetchTodos"]);
     yield put(loadTodosSuccess(todos));
   } catch (e) {
     yield put(loadTodosFailure());
@@ -27,7 +27,7 @@ function* fetchTodos() {
 
 function* addTodoRequest({ payload: { text } }: CreateTodoAction) {
   try {
-    const todo: Todo = yield call([todosApi, 'addTodo'], text);
+    const todo: Todo = yield call([todosApi, "addTodo"], text);
     yield put(syncTodo(todo));
   } catch (e) {
     console.log(e);
@@ -36,7 +36,7 @@ function* addTodoRequest({ payload: { text } }: CreateTodoAction) {
 
 function* removeTodoRequest({ payload: { id } }: RemoveTodoAction) {
   try {
-    const deletedTodo: Todo = yield call([todosApi, 'deleteTodo'], id);
+    const deletedTodo: Todo = yield call([todosApi, "deleteTodo"], id);
     yield put(removeTodo(deletedTodo.id));
   } catch (e) {
     console.log(e);
@@ -47,7 +47,7 @@ function* markCompletedTodoRequest({
   payload: { id },
 }: MarkCompletedTodoAction) {
   try {
-    const completedTodo: Todo = yield call([todosApi, 'markCompletedTodo'], id);
+    const completedTodo: Todo = yield call([todosApi, "markCompletedTodo"], id);
     yield put(markCompletedTodo(completedTodo.id));
   } catch (e) {
     console.log(e);
