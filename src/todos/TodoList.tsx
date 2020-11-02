@@ -16,8 +16,6 @@ const TodoListWrapper = styled.div`
   max-width: 720px;
   margin: 2rem auto;
   padding: 2rem 1rem;
-  background-color: white;
-  border-radius: 4px;
 `;
 
 const TodoList = () => {
