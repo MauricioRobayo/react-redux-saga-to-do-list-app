@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { loadTodos, removeTodo, markCompletedTodo } from "../actions";
 import TodoItem from "./TodoItem";
-import { AppState } from "../store";
+import { AppState } from "../types";
 import NewTodoForm from "./NewTodoForm";
 import {
   getCompleteTodos,

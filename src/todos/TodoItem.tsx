@@ -1,5 +1,6 @@
 import React from "react";
-import { Todo } from "../store";
+
+import { Todo } from "../types";
 
 type TodoProps = {
   todo: Todo;

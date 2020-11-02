@@ -1,4 +1,4 @@
-import { Todo } from "./store";
+import { Todo, TodosActionTypes } from "./types";
 
 export const SYNC_TODO = "SYNC_TODO";
 export const CREATE_TODO = "CREATE_TODO";
@@ -8,52 +8,6 @@ export const LOAD_TODOS = "LOAD_TODOS";
 export const LOAD_TODOS_IN_PROGRESS = "LOAD_TODOS_IN_PROGRESS";
 export const LOAD_TODOS_SUCCESS = "LOAD_TODOS_SUCCESS";
 export const LOAD_TODOS_FAILURE = "LOAD_TODOS_FAILURE";
-
-export interface CreateTodoAction {
-  type: typeof CREATE_TODO;
-  payload: {
-    text: string;
-  };
-}
-export interface RemoveTodoAction {
-  type: typeof REMOVE_TODO;
-  payload: {
-    id: string;
-  };
-}
-export interface MarkCompletedTodoAction {
-  type: typeof MARK_COMPLETED_STATUS;
-  payload: {
-    id: string;
-  };
-}
-interface SyncTodoAction {
-  type: typeof SYNC_TODO;
-  payload: {
-    todo: Todo;
-  };
-}
-interface LoadTodosAction {
-  type: typeof LOAD_TODOS;
-}
-interface LoadTodosSuccessAction {
-  type: typeof LOAD_TODOS_SUCCESS;
-  payload: {
-    todos: Todo[];
-  };
-}
-interface LoadTodosFailureAction {
-  type: typeof LOAD_TODOS_FAILURE;
-}
-
-export type TodosActionTypes =
-  | SyncTodoAction
-  | CreateTodoAction
-  | RemoveTodoAction
-  | MarkCompletedTodoAction
-  | LoadTodosAction
-  | LoadTodosSuccessAction
-  | LoadTodosFailureAction;
 
 export const syncTodo = (todo: Todo): TodosActionTypes => ({
   type: SYNC_TODO,

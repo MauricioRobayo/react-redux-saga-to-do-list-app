@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { AppState } from "./store";
+import { AppState } from "./types";
 
 export const getTodos = (state: AppState) => state.todos.data;
 export const getTodosLoading = (state: AppState) => state.todos.isLoading;

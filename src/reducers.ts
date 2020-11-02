@@ -5,9 +5,8 @@ import {
   LOAD_TODOS,
   LOAD_TODOS_FAILURE,
   LOAD_TODOS_SUCCESS,
-  TodosActionTypes,
 } from "./actions";
-import { AppState } from "./store";
+import { AppState, TodosActionTypes } from "./types";
 
 type TodosState = AppState["todos"];
 

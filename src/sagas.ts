@@ -1,13 +1,16 @@
-import { Todo } from "./store";
 import { put, call, all, takeEvery, takeLatest } from "redux-saga/effects";
+
+import {
+  Todo,
+  CreateTodoAction,
+  RemoveTodoAction,
+  MarkCompletedTodoAction,
+} from "./types";
 import {
   LOAD_TODOS,
   CREATE_TODO,
   REMOVE_TODO,
   MARK_COMPLETED_STATUS,
-  CreateTodoAction,
-  RemoveTodoAction,
-  MarkCompletedTodoAction,
   loadTodosSuccess,
   loadTodosFailure,
   syncTodo,

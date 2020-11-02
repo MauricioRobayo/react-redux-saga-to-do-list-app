@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { AppState } from "../store";
+import { AppState } from "../types";
 import { createTodo } from "../actions";
 import { getTodos } from "../selectors";
 

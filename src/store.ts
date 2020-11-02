@@ -4,22 +4,10 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
+
 import { todos } from "./reducers";
 import rootSaga from "./sagas";
-
-export type Todo = {
-  id: string;
-  text: string;
-  isCompleted: boolean;
-  createdAt: string;
-};
-
-export type AppState = {
-  todos: {
-    data: Todo[];
-    isLoading: boolean;
-  };
-};
+import { AppState } from "./types";
 
 const reducers = { todos };
 

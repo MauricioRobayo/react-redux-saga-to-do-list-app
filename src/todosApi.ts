@@ -1,5 +1,6 @@
 import axios from "axios";
-import { Todo } from "./store";
+
+import { Todo } from "./types";
 
 class TodosApi {
   private API_URL = "http://localhost:8080/todos";
