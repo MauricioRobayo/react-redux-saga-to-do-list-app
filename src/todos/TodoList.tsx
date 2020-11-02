@@ -42,7 +42,7 @@ const TodoList = () => {
       <NewTodoForm />
       {incompleteTodos.map((todo) => (
         <TodoItem
-          key={todo.text}
+          key={todo.id}
           todo={todo}
           removeTodo={onRemoveTodoHandler}
           markCompletedTodo={onMarkCompletedTodoHandler}
@@ -51,7 +51,7 @@ const TodoList = () => {
       <h2>Completed TODOS</h2>
       {completeTodos.map((todo) => (
         <TodoItem
-          key={todo.text}
+          key={todo.id}
           todo={todo}
           removeTodo={onRemoveTodoHandler}
         />
