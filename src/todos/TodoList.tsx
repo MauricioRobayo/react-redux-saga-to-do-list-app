@@ -38,8 +38,8 @@ const TodoList = () => {
   const loader = <div>Loading todos...</div>;
   const content = (
     <>
-    <h2>TODOS</h2>
       <NewTodoForm />
+      <h2>TODOS</h2>
       {incompleteTodos.map((todo) => (
         <TodoItem
           key={todo.id}
