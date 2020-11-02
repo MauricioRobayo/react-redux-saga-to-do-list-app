@@ -4,7 +4,7 @@ import { Todo } from "../store";
 type TodoProps = {
   todo: Todo;
   removeTodo: (id: string) => void;
-  markCompletedTodo?: (id: string) => void;
+  markCompletedTodo: (id: string) => void;
 };
 
 const TodoItem = ({ todo, removeTodo, markCompletedTodo }: TodoProps) => {
@@ -14,7 +14,7 @@ const TodoItem = ({ todo, removeTodo, markCompletedTodo }: TodoProps) => {
       <button type="button" onClick={() => removeTodo(todo.id)}>
         Remove
       </button>
-      {typeof markCompletedTodo === 'undefined' ? null : (
+      {todo.isCompleted ? null : (
         <button type="button" onClick={() => markCompletedTodo(todo.id)}>
           Mark completed
         </button>

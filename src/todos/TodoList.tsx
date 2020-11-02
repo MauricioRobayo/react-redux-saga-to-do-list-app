@@ -46,14 +46,15 @@ const TodoList = () => {
           todo={todo}
           removeTodo={onRemoveTodoHandler}
           markCompletedTodo={onMarkCompletedTodoHandler}
-        />
-      ))}
+          />
+          ))}
       <h2>Completed TODOS</h2>
       {completeTodos.map((todo) => (
         <TodoItem
           key={todo.id}
           todo={todo}
           removeTodo={onRemoveTodoHandler}
+          markCompletedTodo={onMarkCompletedTodoHandler}
         />
       ))}
     </>
