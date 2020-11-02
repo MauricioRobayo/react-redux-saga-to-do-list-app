@@ -38,6 +38,7 @@ const TodoList = () => {
   const loader = <div>Loading todos...</div>;
   const content = (
     <>
+    <h2>TODOS</h2>
       <NewTodoForm />
       {incompleteTodos.map((todo) => (
         <TodoItem
@@ -47,7 +48,7 @@ const TodoList = () => {
           markCompletedTodo={onMarkCompletedTodoHandler}
         />
       ))}
-      <h2>Complete TODOS</h2>
+      <h2>Completed TODOS</h2>
       {completeTodos.map((todo) => (
         <TodoItem
           key={todo.text}
