@@ -14,9 +14,7 @@ import {
   removeTodo,
   markCompletedTodo,
 } from "./actions";
-import TodosApi from "./todosApi";
-
-const todosApi = new TodosApi();
+import todosApi from "./todosApi";
 
 function* fetchTodos() {
   try {

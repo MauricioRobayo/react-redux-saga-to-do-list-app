@@ -25,4 +25,6 @@ class TodosApi {
   }
 }
 
-export default TodosApi;
+const todosApi = new TodosApi();
+
+export default todosApi;
