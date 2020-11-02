@@ -1,5 +1,5 @@
 {
-  "name": "react-redux-saga-todo",
+  "name": "react-redux-saga-to-do-list-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
