@@ -57,27 +57,15 @@ function* markCompletedTodoRequest({
   }
 }
 
-function* watchLoadTodos() {
+function* watchTodos() {
   yield takeLatest(LOAD_TODOS, fetchTodos);
-}
-
-function* watchCreateTodo() {
   yield takeLatest(CREATE_TODO, addTodoRequest);
-}
-
-function* watchRemoveTodo() {
   yield takeEvery(REMOVE_TODO, removeTodoRequest);
-}
-
-function* watchMarkCompletedTodo() {
   yield takeEvery(MARK_COMPLETED_STATUS, markCompletedTodoRequest);
 }
 
 export default function* rootSaga() {
   yield all([
-    watchLoadTodos(),
-    watchCreateTodo(),
-    watchRemoveTodo(),
-    watchMarkCompletedTodo(),
+    watchTodos(),
   ]);
 }
