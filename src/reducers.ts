@@ -5,6 +5,7 @@ import {
   LOAD_TODOS,
   LOAD_TODOS_FAILURE,
   LOAD_TODOS_SUCCESS,
+  DISPLAY_ERROR,
 } from "./actions";
 import { AppState, TodosActionTypes } from "./types";
 
@@ -13,6 +14,7 @@ type TodosState = AppState["todos"];
 const initialState: TodosState = {
   data: [],
   isLoading: false,
+  error: null,
 };
 
 export const todos = (
@@ -56,6 +58,11 @@ export const todos = (
         ...state,
         isLoading: false,
       };
+    case DISPLAY_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      }
     default:
       return state;
   }

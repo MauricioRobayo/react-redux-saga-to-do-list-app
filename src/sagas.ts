@@ -16,6 +16,7 @@ import {
   syncTodo,
   removeTodo,
   markCompletedTodo,
+  displayError,
 } from "./actions";
 import todosApi from "./todosApi";
 
@@ -25,6 +26,7 @@ function* fetchTodos() {
     yield put(loadTodosSuccess(todos));
   } catch (e) {
     yield put(loadTodosFailure());
+    yield put(displayError(String(e)));
   }
 }
 
@@ -33,7 +35,7 @@ function* addTodoRequest({ payload: { text } }: CreateTodoAction) {
     const todo: Todo = yield call([todosApi, "addTodo"], text);
     yield put(syncTodo(todo));
   } catch (e) {
-    console.log(e);
+    yield put(displayError(String(e)));
   }
 }
 
@@ -42,7 +44,7 @@ function* removeTodoRequest({ payload: { id } }: RemoveTodoAction) {
     const deletedTodo: Todo = yield call([todosApi, "deleteTodo"], id);
     yield put(removeTodo(deletedTodo.id));
   } catch (e) {
-    console.log(e);
+    yield put(displayError(String(e)));
   }
 }
 
@@ -53,7 +55,7 @@ function* markCompletedTodoRequest({
     const completedTodo: Todo = yield call([todosApi, "markCompletedTodo"], id);
     yield put(markCompletedTodo(completedTodo.id));
   } catch (e) {
-    console.log(e);
+    yield put(displayError(String(e)));
   }
 }
 

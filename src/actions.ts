@@ -8,6 +8,7 @@ export const LOAD_TODOS = "LOAD_TODOS";
 export const LOAD_TODOS_IN_PROGRESS = "LOAD_TODOS_IN_PROGRESS";
 export const LOAD_TODOS_SUCCESS = "LOAD_TODOS_SUCCESS";
 export const LOAD_TODOS_FAILURE = "LOAD_TODOS_FAILURE";
+export const DISPLAY_ERROR = "DISPLAY_ERROR";
 
 export const syncTodo = (todo: Todo): TodosActionTypes => ({
   type: SYNC_TODO,
@@ -43,3 +44,8 @@ export const loadTodosSuccess = (todos: Todo[]): TodosActionTypes => ({
 export const loadTodosFailure = (): TodosActionTypes => ({
   type: LOAD_TODOS_FAILURE,
 });
+
+export const displayError = (message: string): TodosActionTypes => ({
+  type: DISPLAY_ERROR,
+  payload: message,
+})

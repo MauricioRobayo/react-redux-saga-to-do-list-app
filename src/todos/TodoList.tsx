@@ -6,6 +6,7 @@ import { loadTodos, removeTodo, markCompletedTodo } from "../actions";
 import TodoItem from "./TodoItem";
 import { AppState } from "../types";
 import NewTodoForm from "./NewTodoForm";
+import Error from '../error/error';
 import {
   getCompleteTodos,
   getIncompleteTodos,
@@ -19,6 +20,7 @@ const TodoListWrapper = styled.div`
 `;
 
 const TodoList = () => {
+  const errorMessage = useSelector((state: AppState) => state.todos.error);
   const completeTodos = useSelector<AppState, AppState["todos"]["data"]>(
     getCompleteTodos
   );
@@ -67,6 +69,10 @@ const TodoList = () => {
       ))}
     </TodoListWrapper>
   );
+
+  if (errorMessage) {
+    return <Error message={errorMessage} />
+  }
 
   return isLoading ? loader : content;
 };

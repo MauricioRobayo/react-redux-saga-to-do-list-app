@@ -1,3 +1,4 @@
+import { DiagnosticCategory } from "typescript";
 import {
   SYNC_TODO,
   CREATE_TODO,
@@ -6,6 +7,7 @@ import {
   LOAD_TODOS,
   LOAD_TODOS_SUCCESS,
   LOAD_TODOS_FAILURE,
+  DISPLAY_ERROR,
 } from "./actions";
 
 export type Todo = {
@@ -19,6 +21,7 @@ export type AppState = {
   todos: {
     data: Todo[];
     isLoading: boolean;
+    error: string | null;
   };
 };
 
@@ -58,6 +61,10 @@ export interface LoadTodosSuccessAction {
 export interface LoadTodosFailureAction {
   type: typeof LOAD_TODOS_FAILURE;
 }
+export interface DisplayError {
+  type: typeof DISPLAY_ERROR;
+  payload: string;
+}
 
 export type TodosActionTypes =
   | SyncTodoAction
@@ -66,4 +73,5 @@ export type TodosActionTypes =
   | MarkCompletedTodoAction
   | LoadTodosAction
   | LoadTodosSuccessAction
-  | LoadTodosFailureAction;
+  | LoadTodosFailureAction
+  | DisplayError;
