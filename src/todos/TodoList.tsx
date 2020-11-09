@@ -4,7 +4,7 @@ import styled from 'styled-components/macro';
 
 import { loadTodos, removeTodo, markCompletedTodo } from "../actions";
 import TodoItem from "./TodoItem";
-import { AppState, Status } from "../types";
+import { AppState } from "../types";
 import NewTodoForm from "./NewTodoForm";
 import Error from '../error/error';
 import {
@@ -46,14 +46,14 @@ const TodoList = () => {
     dispatch(markCompletedTodo(id));
   };
 
-  if (status === Status.rejected) {
+  if (status === 'rejected') {
     if (errorMessage) {
       return <Error message={errorMessage} />
     }
     return <Error />
   }
 
-  if (status === Status.pending || status === Status.idle) {
+  if (status === 'pending' || status === 'idle') {
     return <div>Loading todos...</div>
   }
 

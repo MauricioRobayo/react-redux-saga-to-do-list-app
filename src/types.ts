@@ -9,13 +9,6 @@ import {
   DISPLAY_ERROR,
 } from "./actions";
 
-export enum Status {
-  idle,
-  pending,
-  resolved,
-  rejected,
-}
-
 export type Todo = {
   id: string;
   text: string;
@@ -26,7 +19,7 @@ export type Todo = {
 export type AppState = {
   todos: {
     data: Todo[];
-    status: Status;
+    status: "idle" | "pending" | "resolved" | "rejected";
     error: string | null;
   };
 };
