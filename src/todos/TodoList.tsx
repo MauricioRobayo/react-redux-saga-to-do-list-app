@@ -47,10 +47,7 @@ const TodoList = () => {
   };
 
   if (status === 'rejected') {
-    if (errorMessage) {
-      return <Error message={errorMessage} />
-    }
-    return <Error />
+    return <Error message={errorMessage || "Something unexpected happened!"} />
   }
 
   if (status === 'pending' || status === 'idle') {
