@@ -7,13 +7,14 @@ import {
   LOAD_TODOS_SUCCESS,
   DISPLAY_ERROR,
 } from "./actions";
-import { AppState, TodosActionTypes } from "./types";
+import { AppState, TodosActionTypes, Status } from "./types";
 
 type TodosState = AppState["todos"];
 
+
 const initialState: TodosState = {
   data: [],
-  isLoading: false,
+  status: Status.idle,
   error: null,
 };
 
@@ -45,18 +46,18 @@ export const todos = (
     case LOAD_TODOS:
       return {
         ...state,
-        isLoading: true,
+        status: Status.pending,
       };
     case LOAD_TODOS_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        status: Status.resolved,
         data: action.payload.todos,
       };
     case LOAD_TODOS_FAILURE:
       return {
         ...state,
-        isLoading: false,
+        status: Status.rejected,
       };
     case DISPLAY_ERROR:
       return {

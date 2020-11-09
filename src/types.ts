@@ -1,4 +1,3 @@
-import { DiagnosticCategory } from "typescript";
 import {
   SYNC_TODO,
   CREATE_TODO,
@@ -10,6 +9,13 @@ import {
   DISPLAY_ERROR,
 } from "./actions";
 
+export enum Status {
+  idle,
+  pending,
+  resolved,
+  rejected,
+}
+
 export type Todo = {
   id: string;
   text: string;
@@ -20,7 +26,7 @@ export type Todo = {
 export type AppState = {
   todos: {
     data: Todo[];
-    isLoading: boolean;
+    status: Status;
     error: string | null;
   };
 };

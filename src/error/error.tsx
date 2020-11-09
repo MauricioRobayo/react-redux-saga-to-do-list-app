@@ -6,7 +6,7 @@ const ErrorWrapper = styled.div`
   color: white;
 `;
 
-const Error = ({ message }: { message: string }) => (
+const Error = ({ message = "Something unexpected happened!"}: { message?: string }) => (
   <ErrorWrapper>
     {message}
   </ErrorWrapper>

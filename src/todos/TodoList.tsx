@@ -4,13 +4,14 @@ import styled from 'styled-components/macro';
 
 import { loadTodos, removeTodo, markCompletedTodo } from "../actions";
 import TodoItem from "./TodoItem";
-import { AppState } from "../types";
+import { AppState, Status } from "../types";
 import NewTodoForm from "./NewTodoForm";
 import Error from '../error/error';
 import {
   getCompleteTodos,
   getIncompleteTodos,
-  getTodosLoading,
+  getTodosStatus,
+  getErrorMessage,
 } from "../selectors";
 
 const TodoListWrapper = styled.div`
@@ -20,15 +21,15 @@ const TodoListWrapper = styled.div`
 `;
 
 const TodoList = () => {
-  const errorMessage = useSelector((state: AppState) => state.todos.error);
+  const errorMessage = useSelector<AppState, AppState["todos"]["error"]>(getErrorMessage);
   const completeTodos = useSelector<AppState, AppState["todos"]["data"]>(
     getCompleteTodos
   );
   const incompleteTodos = useSelector<AppState, AppState["todos"]["data"]>(
     getIncompleteTodos
   );
-  const isLoading = useSelector<AppState, AppState["todos"]["isLoading"]>(
-    getTodosLoading
+  const status = useSelector<AppState, AppState["todos"]["status"]>(
+    getTodosStatus
   );
 
   const dispatch = useDispatch();
@@ -45,8 +46,18 @@ const TodoList = () => {
     dispatch(markCompletedTodo(id));
   };
 
-  const loader = <div>Loading todos...</div>;
-  const content = (
+  if (status === Status.rejected) {
+    if (errorMessage) {
+      return <Error message={errorMessage} />
+    }
+    return <Error />
+  }
+
+  if (status === Status.pending || status === Status.idle) {
+    return <div>Loading todos...</div>
+  }
+
+  return (
     <TodoListWrapper>
       <NewTodoForm />
       <h2>TODOS</h2>
@@ -69,12 +80,6 @@ const TodoList = () => {
       ))}
     </TodoListWrapper>
   );
-
-  if (errorMessage) {
-    return <Error message={errorMessage} />
-  }
-
-  return isLoading ? loader : content;
 };
 
 export default TodoList;
